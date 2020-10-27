@@ -37,7 +37,7 @@ export const AddTodo: FC<AddTodoProps> = memo(({ onAddTodo }) => {
           <Button
             onClick={handleSubmit}
             fullWidth
-            color="secondary"
+            color="primary"
             variant="outlined"
             disabled={!text.length}
           >

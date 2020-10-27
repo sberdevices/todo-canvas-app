@@ -1,45 +1,30 @@
 import React, { FC, memo, useReducer } from "react";
+import {
+  createAssistant,
+  createSmartappDebugger,
+} from "@sberdevices/assistant-client";
 import { AppBar, Toolbar, Typography, Paper } from "@material-ui/core";
 
+import { reducer, State as StateType } from "./reducer";
 import { AddTodo } from "./components/AddTodo";
 import { TodoList } from "./components/TodoList";
 
-export type Todo = {
-  id: number;
-  text: string;
-};
-
-type State = {
-  todos: Array<Todo>;
-};
-
-type Action =
-  | { type: "ADD_TODO"; text: string }
-  | { type: "DELETE_TODO"; id: number };
-
-export const reducer = (state: State, action: Action) => {
-  switch (action.type) {
-    case "ADD_TODO":
-      return {
-        ...state,
-        todos: [
-          ...state.todos,
-          { id: state.todos.length + 1, text: action.text },
-        ],
-      };
-    case "DELETE_TODO":
-      return {
-        ...state,
-        todos: state.todos.filter(({ id }) => id !== action.id),
-      };
-    default:
-      throw new Error();
+const initializeAssistant = (getState: any) => {
+  if (process.env.NODE_ENV === "development") {
+    return createSmartappDebugger({
+      token:
+        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDM4MTA1MTEsImV4cCI6MTYwMzg5NjkxMSwidHlwZSI6IkJlYXJlciIsImp0aSI6ImM3ZWJjZWI0LTQ2ZTYtNGJiZS1iZjg4LTY3MDgzYzdmYzBhMyIsInN1YiI6ImYyZDU4Yjg3MDFlMmNkNjJhMjhmY2NhMWM0OTNkMDQ5NjI1ZjM4ODcwOTE2YjZjMDJlOGZmNjdiZmYzYjQ1MjQ1MzliZTkyNzAwNDI2Mjk4IiwiYXVkIjoiVlBTIn0.tr5f4-4ix4nhfkcHehrCnnQx-kiBJM8HMCmZH0KVAQA5__HA1GQRbnhmqZAgL_Hn-l6OUo-TXNNIdCmb6kMuS5_ZXywr9S3S4Qdd4Uci10oH1POrLecqOkmaii1QVAq5GPGjIKOTh0qkddcRT1tqaLnACXp0URDFMfzyPrjkOx6L3tQ1bo6XCS5xVd1LBTPXxnPhpY5b3tnNfdig-XtZk-ObUOnFFEMB33q5OfRZwhXU3NrQL-0ilqDsnqfZc_MHX_G45xmxnc7AB1zESxfUp173yOxdS-anSCV_GRVn9rrHf34ra76ePZu65JC5_-vxlNCvFif4lCuCYAXmDMdpBGLIg60vu9hKuy-BnYu9Yno2KTOYAvur0cHbRXK_77PPcFRlCR3TMykvMBAEvI_PPZ5xlCN8fJIY-vGScPSSJ8TSOjwATNDHj7f1vhagCZ24zk0Ufl9BhLfx1NDKWubKo_6KHebzP8LdQSDQwWNH1ulXVY3UGmLcEW1EUcmOfzghMcQjiIcvVukQuOddC3eKGJ4kS07cvbuleBJCkGEY5s-P6hPJ6a_lLL7_Y2DKHl5zV-MSPEW2FXXhZbZIrwA2PYpMsmqBzo5JYoJVo1CXffu0KK32zaXLlnX8bXi-QOUiCTzekLFQaSlB9Q98tstqMJtZobwuAQZGfTXQWFCo9DM",
+      initPhrase: "Запусти Ваня Туду",
+      getState,
+    });
   }
+
+  return createAssistant({ getState });
 };
 
-const initialState: State = {
-  todos: [],
-};
+initializeAssistant(() => {});
+
+const initialState: StateType = { todos: [] };
 
 export const App: FC = memo(() => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -54,9 +39,10 @@ export const App: FC = memo(() => {
           <Typography color="inherit">Todo App</Typography>
         </Toolbar>
       </AppBar>
-      <AddTodo onAddTodo={(text) => dispatch({ type: "ADD_TODO", text })} />
+      <AddTodo onAddTodo={(title) => dispatch({ type: "ADD_TODO", title })} />
       <TodoList
         todos={state.todos}
+        onToggleTodo={(id) => dispatch({ type: "TOGGLE_TODO", id })}
         onDeleteTodo={(id) => dispatch({ type: "DELETE_TODO", id })}
       />
     </Paper>
