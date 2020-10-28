@@ -5,7 +5,7 @@ import {
   createAssistant,
   createSmartappDebugger,
 } from "@sberdevices/assistant-client";
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Container } from "@material-ui/core";
 
 import { reducer, State as StateType } from "./reducer";
 import { AddTodo } from "./components/AddTodo";
@@ -38,12 +38,14 @@ export const App: FC = memo(() => {
           <Typography color="textPrimary">Todo App</Typography>
         </Toolbar>
       </AppBar>
-      <AddTodo onAddTodo={(title) => dispatch({ type: "ADD_TODO", title })} />
-      <TodoList
-        todos={state.todos}
-        onToggleTodo={(id) => dispatch({ type: "TOGGLE_TODO", id })}
-        onDeleteTodo={(id) => dispatch({ type: "DELETE_TODO", id })}
-      />
+      <Container maxWidth="md" style={{ paddingBottom: 144 }}>
+        <AddTodo onAddTodo={(title) => dispatch({ type: "ADD_TODO", title })} />
+        <TodoList
+          todos={state.todos}
+          onToggleTodo={(id) => dispatch({ type: "TOGGLE_TODO", id })}
+          onDeleteTodo={(id) => dispatch({ type: "DELETE_TODO", id })}
+        />
+      </Container>
     </ThemeProvider>
   );
 });
