@@ -1,9 +1,11 @@
 import React, { FC, memo, useReducer } from "react";
+import { ThemeProvider } from "@material-ui/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 import {
   createAssistant,
   createSmartappDebugger,
 } from "@sberdevices/assistant-client";
-import { AppBar, Toolbar, Typography, Paper } from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 
 import { reducer, State as StateType } from "./reducer";
 import { AddTodo } from "./components/AddTodo";
@@ -30,13 +32,10 @@ export const App: FC = memo(() => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <Paper
-      elevation={0}
-      style={{ padding: 0, margin: 0, backgroundColor: "#fafafa" }}
-    >
-      <AppBar color="primary" position="static" style={{ height: 64 }}>
+    <ThemeProvider theme={createMuiTheme({ palette: { type: "dark" } })}>
+      <AppBar color="inherit" position="static" style={{ height: 64 }}>
         <Toolbar style={{ height: 64 }}>
-          <Typography color="inherit">Todo App</Typography>
+          <Typography color="textPrimary">Todo App</Typography>
         </Toolbar>
       </AppBar>
       <AddTodo onAddTodo={(title) => dispatch({ type: "ADD_TODO", title })} />
@@ -45,6 +44,6 @@ export const App: FC = memo(() => {
         onToggleTodo={(id) => dispatch({ type: "TOGGLE_TODO", id })}
         onDeleteTodo={(id) => dispatch({ type: "DELETE_TODO", id })}
       />
-    </Paper>
+    </ThemeProvider>
   );
 });
