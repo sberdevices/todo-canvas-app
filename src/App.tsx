@@ -33,12 +33,16 @@ export const App: FC = memo(() => {
 
   return (
     <ThemeProvider theme={createMuiTheme({ palette: { type: "dark" } })}>
-      <AppBar color="inherit" position="static" style={{ height: 64 }}>
-        <Toolbar style={{ height: 64 }}>
+      <AppBar position="static" color="inherit">
+        <Toolbar>
           <Typography color="textPrimary">Todo App</Typography>
         </Toolbar>
       </AppBar>
-      <Container maxWidth="md" style={{ paddingBottom: 144 }}>
+      <Container
+        component="main"
+        maxWidth="md"
+        style={{ paddingTop: 16, paddingBottom: 160 }}
+      >
         <AddTodo onAddTodo={(title) => dispatch({ type: "ADD_TODO", title })} />
         <TodoList
           todos={state.todos}

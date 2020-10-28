@@ -13,6 +13,8 @@ type Action =
   | { type: "TOGGLE_TODO"; id: number }
   | { type: "DELETE_TODO"; id: number };
 
+let nextId: number = 1;
+
 export const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "ADD_TODO":
@@ -20,7 +22,7 @@ export const reducer = (state: State, action: Action) => {
         ...state,
         todos: [
           ...state.todos,
-          { id: state.todos.length + 1, title: action.title, completed: false },
+          { id: nextId++, title: action.title, completed: false },
         ],
       };
     case "TOGGLE_TODO":

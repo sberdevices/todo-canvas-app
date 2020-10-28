@@ -28,7 +28,13 @@ export const TodoListItem: FC<TodoProps> = memo(
         primary={
           <>
             <strong style={{ marginRight: 4 }}>{todo.id}.</strong>
-            {todo.title}
+            <span
+              style={{
+                textDecorationLine: todo.completed ? "line-through" : "none",
+              }}
+            >
+              {todo.title}
+            </span>
           </>
         }
       />

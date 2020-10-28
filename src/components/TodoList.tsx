@@ -14,7 +14,7 @@ export const TodoList: FC<TodoListProps> = memo(
   ({ todos, onToggleTodo, onDeleteTodo }) => (
     <>
       {todos.map((todo) => (
-        <Paper key={todo.id} style={{ margin: 16 }}>
+        <Paper key={todo.id} style={{ marginTop: 16 }}>
           <List style={{ overflow: "scroll" }}>
             <TodoListItem
               todo={todo}

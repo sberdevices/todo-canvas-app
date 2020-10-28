@@ -16,7 +16,7 @@ export const AddTodo: FC<AddTodoProps> = memo(({ onAddTodo }) => {
   };
 
   return (
-    <Paper style={{ margin: 16, padding: 16 }}>
+    <Paper style={{ padding: 16 }}>
       <Grid container>
         <Grid xs={10} md={11} item style={{ paddingRight: 16 }}>
           <form
@@ -29,6 +29,7 @@ export const AddTodo: FC<AddTodoProps> = memo(({ onAddTodo }) => {
               placeholder="Add Todo"
               value={text}
               onChange={({ target: { value } }) => setText(value)}
+              autoFocus
               fullWidth
             />
           </form>
