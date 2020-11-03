@@ -1,10 +1,8 @@
 {
-  "name": "todo",
+  "name": "salute-demo-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.9.1",
     "@sberdevices/assistant-client": "^1.0.2",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.0",
