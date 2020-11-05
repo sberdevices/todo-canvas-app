@@ -18,8 +18,8 @@ import { reducer } from "./store";
 const initializeAssistant = (getState: any) => {
   if (process.env.NODE_ENV === "development") {
     return createSmartappDebugger({
-      token: "",
-      initPhrase: "Запусти ...",
+      token: process.env.REACT_APP_TOKEN ?? "",
+      initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
       getState,
     });
   }
