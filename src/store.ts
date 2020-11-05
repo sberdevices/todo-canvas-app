@@ -1,14 +1,14 @@
-export type Note = {
+type Note = {
   id: string;
   title: string;
   completed: boolean;
 };
 
-export type State = {
+type State = {
   notes: Array<Note>;
 };
 
-export type Action =
+type Action =
   | {
       type: "add_note";
       note: string;
@@ -30,7 +30,7 @@ export const reducer = (state: State, action: Action) => {
         notes: [
           ...state.notes,
           {
-            id: Math.random().toString(),
+            id: Math.random().toString(36).substring(7),
             title: action.note,
             completed: false,
           },
