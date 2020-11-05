@@ -1,6 +1,6 @@
 # salute-demo-app
 
-##### Это небольшое Todo приложение (добавление, выполнение и удаление задач. [См. видео](https://youtu.be/P-o2rwHhARo)) может служить примером для работы с [Assistant Client](https://github.com/sberdevices/assistant-client). Для работы необходимо создать проект в "SmartApp Code" и смартап в "SmartApp Studio", сгенерировать token и запустить проект.
+Это небольшое Todo приложение (добавление, выполнение и удаление задач. [См. видео](https://youtu.be/P-o2rwHhARo)) может служить примером для работы с [Assistant Client](https://github.com/sberdevices/assistant-client). Для работы необходимо создать проект в "SmartApp Code" и смартап в "SmartApp Studio", сгенерировать token и запустить проект.
 
 ## Создание проекта в "SmartApp Code":
 
