@@ -93,7 +93,11 @@ export const App: FC = memo(() => {
               className="done-note"
               type="checkbox"
               checked={note.completed}
-              onChange={() => dispatch({ type: "done_note", id: note.id })}
+              onChange={() => {
+                dispatch({ type: "done_note", id: note.id });
+                assistantRef.current?.sendData({action: {action_id: "DONE", parameters: {note: note.title}}});
+              }
+            }
             />
           </li>
         ))}
